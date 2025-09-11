@@ -1,11 +1,8 @@
 import random
-import os
 
-cwd = os.getcwd()
-files = os.listdir(cwd)
-file = open(r"listarandom.txt") # lê o arquivo TXT
+file_handle = open(r"randomlist.txt") # lê o arquivo TXT
 
-palavras = file.readlines() 
+palavras = file_handle.readlines() 
 palavras_quantidade = len(palavras)
 random_number = random.randint(0, palavras_quantidade - 1) # delimita range de possibilidades de escolha
 escolhido = palavras[random_number] # escolhe palavra randomica do arquivo
