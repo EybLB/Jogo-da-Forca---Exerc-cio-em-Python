@@ -1,1 +1,1 @@
-Desenvolvimento de algoritmo de Jogo da Forca, fazendo uso da prática de Loops, Estruturas Condicionais, Listas e Leitura de Arquivos em Python.
+Development of an Hangman Game algorithm, making usage of loops, conditional structures, lists and reading file from disk using Python Language.
