@@ -1,49 +1,52 @@
 import random
 
-file_handle = open(r"randomlist.txt") # lê o arquivo TXT
+# Reading TXT file
+file_handle = open(r"randomlist.txt")
 
-palavras = file_handle.readlines() 
-palavras_quantidade = len(palavras)
-random_number = random.randint(0, palavras_quantidade - 1) # delimita range de possibilidades de escolha
-escolhido = palavras[random_number] # escolhe palavra randomica do arquivo
-escolhido = escolhido.upper() # conversor de caixa alta
+# Sets the range of possible words to choose based on list length, then chooses a random word from file and converts it to uppercase
+words = file_handle.readlines()
+qty_words = len(words)
+random_number = random.randint(0, qty_words - 1)
+chosen = words[random_number]
+chosen = chosen.upper()
 
-caracteres_jogo = list(escolhido) # converte em lista
-caracteres_jogo.pop() # remover o \n como último elemento da lista
-caracteres_segredo = ["_"] * len(caracteres_jogo) # lista auxiliar
-erros = 0 #variável de tentativas
+# Converts chosen word into a list and removes the '\n' as the last element.
+# Then creates an assistant "blank" list and a variable for tracking attemps.
+game_word = list(chosen)
+game_word.pop()
+hidden_word = ["_"] * len(game_word)
+attempts = 0
 
-print("\n*****Jogo da Forca!*****\n")
-print(caracteres_segredo, "\n")
+print("\n*****Hangman Game!*****\n")
+print(hidden_word, "\n")
 
-while erros < 5:
-    quebra = False
-    chute = str(input("Digite sua Letra:\n"))
-    chute = chute.upper()
-    if chute in caracteres_jogo:
-        for i in range(0, len(caracteres_jogo)):
-            if chute == caracteres_jogo[i] :
-                print("Acerto!!")
-                caracteres_segredo[i] = chute
-                if '_' not in caracteres_segredo:
-                    print("\n*****Você ganhou!!*****")
-                    quebra = True
+while attempts < 5:
+    win = False
+    guess = str(input("Type your letter:\n"))
+    guess = guess.upper()
+    if guess in game_word:
+        for i in range(0, len(game_word)):
+            if guess == game_word[i]:
+                print("Well done!!")
+                hidden_word[i] = guess
+                if "_" not in hidden_word:
+                    print("\n*****You won!!*****")
+                    win = True
                 else:
                     pass
-        print('\n')
-        print(caracteres_segredo)
-        print('\n')
+        print("\n")
+        print(hidden_word)
+        print("\n")
 
     else:
-        tentativas = 4-erros
-        print("\n>>>Errou! Digite outra palavra!")
-        print(">>>Você ainda tem: " + str(tentativas) + " tentativas!\n")  
-        erros = erros + 1
-        
-    if quebra == True:
-        break
-    
-if erros == 5:
-    print("*****Fim das Tentativas!*****")
-    print("*****Você perdeu!*****")
+        try_again = 4 - attempts
+        print("\n>>>Ooops! Try another letter!")
+        print(">>>You still have: " + str(try_again) + " attempts!\n")
+        attempts = attempts + 1
 
+    if win:
+        break
+
+if attempts == 5:
+    print("*****No more attempts!*****")
+    print("*****You lost!*****")
